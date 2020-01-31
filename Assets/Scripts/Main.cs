@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 
@@ -11,9 +12,11 @@ public class Main : MonoBehaviour
     private Dictionary<GameState, int> m_stateToSceneIndexMap;
     private bool m_IsInSceneTransition = false;
 
+    private Canvas WinScreen;
+
     private ISceneController m_SceneController;
 
-
+    
     private void Start()
     {
         m_stateToSceneIndexMap = new Dictionary<GameState, int>();

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using GGJ;
+using GGJ.RepairTheme;
 
 public class Level01 : MonoBehaviour, ISceneController
 {
@@ -9,21 +9,17 @@ public class Level01 : MonoBehaviour, ISceneController
     public event LevelFailHandler LevelFailed;
     public event PauseHandler PauseRequest;
 
-    private fixa
+    private RepairableObject m_repairableObject;
+
     public void Init()
     {
-        throw new System.NotImplementedException();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+         m_repairableObject = FindObjectOfType<RepairableObject>();
+        m_repairableObject.RepairCompleted += OnRepairComplete;
     }
 
     // Update is called once per frame
-    void Update()
+private void OnRepairComplete(RepairableObject objectRef)
     {
-        
+
     }
 }
