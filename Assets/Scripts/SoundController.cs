@@ -6,6 +6,18 @@ namespace GGJ.Audio
 {
     public class SoundController : MonoBehaviour, IMixerController
     {
+        private static SoundController s_instace;
+        public static IMixerController GetMixer()
+        {
+            if(s_instace == null)
+            {
+                GameObject g = new GameObject("SoundController");
+                s_instace = g.AddComponent<SoundController>();
+            }
+            return s_instace;
+        }
+
+
         [SerializeField]
         private AudioMixer m_master;
         [SerializeField]
@@ -68,6 +80,12 @@ namespace GGJ.Audio
         {
             if (!m_master) return;
             ClearParamters(m_mixerParamters);
+        }
+
+        private void Awake()
+        {
+            if (s_instace == null) s_instace = this;
+            else if(s_instace != this) Destroy(gameObject);
         }
     }
 }
