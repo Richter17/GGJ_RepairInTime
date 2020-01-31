@@ -16,18 +16,18 @@ public class UIManager : MonoBehaviour
 
     private Dictionary<UIState, Canvas> m_UIStateToCanvasMap;
 
-    private Canvas WinScreenCanvas;
-    private Button WinBackButton;
-    private Button WinNextButton;
+    public Canvas WinScreenCanvas;
+    public Button WinBackButton;
+    public Button WinNextButton;
 
-    private Canvas LoseScreenCanvas;
-    private Button LoseBackButton;
-    private Button LoseRestartButton;
+    public Canvas LoseScreenCanvas;
+    public Button LoseBackButton;
+    public Button LoseRestartButton;
 
-    private Canvas PauseCanvas;
-    private Button PauseHomeButton;
-    private Button PauseRestartButton;
-    private Button PauseBackButton;
+    public Canvas PauseCanvas;
+    public Button PauseHomeButton;
+    public Button PauseRestartButton;
+    public Button PauseBackButton;
 
     private Canvas m_CurrentCanvas; 
 

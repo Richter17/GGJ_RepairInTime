@@ -8,6 +8,7 @@ public class Level01 : MonoBehaviour, ISceneController
     public event LevelWinHandler LevelWon;
     public event LevelFailHandler LevelLost;
     public event PauseHandler PauseRequest;
+    public event GoToGameplayHandler GoToGameplay;
 
     private RepairableObject m_repairableObject;
 
