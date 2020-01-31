@@ -15,7 +15,7 @@ public class UIManager : MonoBehaviour
     public event UIRestartRequestHandler UIRestartRequest;
 
     private Dictionary<UIState, Canvas> m_UIStateToCanvasMap;
-
+    private GameObject m_bgCanvas;
     public Canvas WinScreenCanvas;
     public Button WinBackButton;
     public Button WinNextButton;
@@ -33,6 +33,7 @@ public class UIManager : MonoBehaviour
 
     public void Init()
     {
+        m_bgCanvas = transform.Find("BG").gameObject;
         m_UIStateToCanvasMap = new Dictionary<UIState, Canvas>();
         m_UIStateToCanvasMap.Add(UIState.Lose, LoseScreenCanvas);
         m_UIStateToCanvasMap.Add(UIState.Win, WinScreenCanvas);
@@ -48,6 +49,7 @@ public class UIManager : MonoBehaviour
     public void ShowUICanvas(UIState state)
     {
         HideUI();
+        //m_bgCanvas.SetActive(true);
         m_CurrentCanvas = m_UIStateToCanvasMap[state];
         m_CurrentCanvas.gameObject.SetActive(true);
     }
@@ -56,8 +58,14 @@ public class UIManager : MonoBehaviour
     {
         if (m_CurrentCanvas != null)
         {
-        m_CurrentCanvas.gameObject.SetActive(false);
+            m_CurrentCanvas.gameObject.SetActive(false);
         }
+        //m_bgCanvas.SetActive(false);
+    }
+
+    public void ToggleBG(bool val)
+    {
+        m_bgCanvas.SetActive(val);
     }
 
 }

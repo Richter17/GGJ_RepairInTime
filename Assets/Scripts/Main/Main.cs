@@ -40,6 +40,7 @@ public class Main : MonoBehaviour
 
     private void GoToMainMenu()
     {
+       m_UIManager.ToggleBG(true);
        StartCoroutine(LoadScene(1));
     }
 
@@ -56,6 +57,7 @@ public class Main : MonoBehaviour
         {
             yield return null;
         }
+        m_UIManager.ToggleBG(sceneIndex == 1);
 
         m_IsInSceneTransition = true;
 
