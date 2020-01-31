@@ -51,6 +51,7 @@ public class Main : MonoBehaviour
 
     IEnumerator LoadScene(int sceneIndex)
     {
+        m_UIManager.HideUI();
         if (m_IsInSceneTransition)
         {
             yield return null;

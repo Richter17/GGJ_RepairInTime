@@ -10,14 +10,24 @@ public class Level01 : MonoBehaviour, ISceneController
     public event PauseHandler PauseRequest;
     public event GoToGameplayHandler GoToGameplay;
 
+
+    public ObjectHealth[] ObjectsHealth;
     private RepairableObject m_repairableObject;
 
     public void Init()
     {
          m_repairableObject = FindObjectOfType<RepairableObject>();
         m_repairableObject.RepairCompleted += OnRepairComplete;
+        foreach (ObjectHealth item in ObjectsHealth)
+        {
+            item.HealthDepleted += OnLevelLost;
+        }
     }
 
+    private void OnLevelLost()
+    {
+        LevelLost();
+    }
     // Update is called once per frame
 private void OnRepairComplete(RepairableObject objectRef)
     {
