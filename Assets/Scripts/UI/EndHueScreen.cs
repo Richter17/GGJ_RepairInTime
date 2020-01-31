@@ -7,6 +7,11 @@ public class EndHueScreen : MonoBehaviour
     [SerializeField]
     private float m_hueAnimationSpeed = 0.01f;
     private Image m_img;
+
+    public Color Color
+    {
+        get { return m_img.color; }
+    }
     // Start is called before the first frame update
     void Start()
     {
