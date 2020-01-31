@@ -47,7 +47,10 @@ public class UIManager : MonoBehaviour
 
     public void ShowUICanvas(UIState state)
     {
+        if (m_CurrentCanvas != null)
+        {
         m_CurrentCanvas.gameObject.SetActive(false);
+        }
         m_CurrentCanvas = m_UIStateToCanvasMap[state];
         m_CurrentCanvas.gameObject.SetActive(true);
     }

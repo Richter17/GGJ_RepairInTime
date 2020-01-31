@@ -29,9 +29,9 @@ namespace GGJ.RepairTheme
             Debug.Log("repaired!");
             m_repairTriggers.Remove(trigger);
             if (m_repairTriggers.Count > 0)
-                RepairCompleted?.Invoke(this);
-            else
                 RepairedPiece?.Invoke(m_repairTriggers.Count);
+            else
+                RepairCompleted?.Invoke(this);
         }
     }
 }
