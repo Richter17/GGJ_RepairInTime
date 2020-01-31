@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace GGJ.RepairTheme
 {
-    public delegate void RepairCompletedHandler();
+    public delegate void RepairCompletedHandler(RepairableObject rep);
     public delegate void RepairedPieceHandler(int piecesLeft);
     public class RepairableObject : MonoBehaviour
     {
@@ -20,13 +20,17 @@ namespace GGJ.RepairTheme
             m_repairTriggers = GetComponentsInChildren<RepairableTrigger>().ToList();
             foreach (var trig in m_repairTriggers)
             {
-
+                trig.Repaired += OnPieceReapired;
             }
         }
 
-        private void OnPieceReapired()
+        private void OnPieceReapired( RepairableTrigger trigger)
         {
-
+            m_repairTriggers.Remove(trigger);
+            if (m_repairTriggers.Count > 0)
+                RepairCompleted?.Invoke(this);
+            else
+                RepairedPiece?.Invoke(m_repairTriggers.Count);
         }
     }
 }

@@ -7,7 +7,7 @@ namespace GGJ.RepairTheme {
     {
 
         public int index = -1;
-        public delegate void RepairedHandler();
+        public delegate void RepairedHandler(RepairableTrigger trigger);
         public event RepairedHandler Repaired;
 
         private void OnTriggerEnter2D(Collider2D piece)
