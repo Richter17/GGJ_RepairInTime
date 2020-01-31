@@ -62,12 +62,20 @@ public class Main : MonoBehaviour
         m_IsInSceneTransition = true;
 
         AsyncOperation async = SceneManager.LoadSceneAsync(sceneIndex);
+        async.allowSceneActivation = false;
         m_UIManager.ShowLoading();
-        while (!async.isDone)
+        float delayCount = 0;
+        while (async.progress < 0.89f || delayCount < 0.5f)
         {
-            m_UIManager.LoadingBar.fillAmount = async.progress;
+            delayCount += 0.01f;
+            m_UIManager.LoadingBar.fillAmount = Mathf.Min(delayCount / 0.5f ,async.progress);
             yield return null;
         }
+        
+        m_UIManager.LoadingBar.fillAmount = 1;
+        async.allowSceneActivation = true;
+        yield return async.isDone;
+        
         m_UIManager.HideLoading();
         m_SceneController = null;
         GameObject[] rootObjects = SceneManager.GetActiveScene().GetRootGameObjects();
