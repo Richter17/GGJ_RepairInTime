@@ -9,7 +9,7 @@ using UnityEngine;
 public interface ISceneController
 {
     event LevelWinHandler LevelWon;
-    event LevelFailHandler LevelFailed;
+    event LevelFailHandler LevelLost;
     event PauseHandler PauseRequest;
 
     void Init();

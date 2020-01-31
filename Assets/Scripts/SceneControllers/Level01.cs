@@ -6,7 +6,7 @@ using GGJ.RepairTheme;
 public class Level01 : MonoBehaviour, ISceneController
 {
     public event LevelWinHandler LevelWon;
-    public event LevelFailHandler LevelFailed;
+    public event LevelFailHandler LevelLost;
     public event PauseHandler PauseRequest;
 
     private RepairableObject m_repairableObject;
@@ -20,6 +20,6 @@ public class Level01 : MonoBehaviour, ISceneController
     // Update is called once per frame
 private void OnRepairComplete(RepairableObject objectRef)
     {
-
+        LevelWon();
     }
 }
