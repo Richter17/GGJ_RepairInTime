@@ -15,8 +15,8 @@ namespace GGJ
 
         bool IsTimeControlled { get; }
 
-        event ControlTimeStartedHandler ControlTimeStarted;
-        event ControlTimeFinishedHandler ControlTimeFinished;
+        event ControlTimeStartedHandler TimeInputStarted;
+        event ControlTimeFinishedHandler TimeInputFinished;
         event UpdateControlHandler ControlTimeUpdate;
     }
 }
