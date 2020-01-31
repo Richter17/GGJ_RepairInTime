@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using GGJ.Audio;
-using GGJ;
+using GGJ.TimeScale;
 public class BGSoundBehavouir : MonoBehaviour
 {
     private IMixerController m_mixer;

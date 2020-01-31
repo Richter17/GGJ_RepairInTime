@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GGJ
+namespace GGJ.TimeScale
 {
     public delegate void ControlTimeStartedHandler();
     public delegate void ControlTimeFinishedHandler();

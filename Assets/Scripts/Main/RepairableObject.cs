@@ -9,7 +9,7 @@ namespace GGJ.RepairTheme
     public delegate void RepairedPieceHandler(int piecesLeft);
     public class RepairableObject : MonoBehaviour, IRepairs
     {
-        [SerializeField]
+        //[SerializeField]
         private List<RepairableTrigger> m_repairTriggers;
 
         public event RepairCompletedHandler RepairCompleted;

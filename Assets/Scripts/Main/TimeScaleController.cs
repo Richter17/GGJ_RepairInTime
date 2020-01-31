@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-namespace GGJ
+namespace GGJ.TimeScale
 {
 
     public class TimeScaleController : MonoBehaviour, ITimeController

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using GGJ;
+using GGJ.TimeScale;
 public class DraggableObject: MonoBehaviour
 {
     public float MaxObjectSpeed = 10;
@@ -32,11 +32,12 @@ public class DraggableObject: MonoBehaviour
         m_rigid.AddForce(m_dragDelta);
         //Debug.Log(m_rigid.velocity.magnitude);
         m_rigid.velocity = Vector3.ClampMagnitude(m_rigid.velocity, MaxObjectSpeed);
+        if (!m_arrow) return;
         Vector2 arrowSize = m_arrow.size;
         arrowSize.x = Mathf.Lerp(2.56f, 8f, m_rigid.velocity.magnitude / MaxObjectSpeed);
         m_arrow.size = arrowSize;
         float angle = Vector3.Angle(Vector3.right, m_rigid.velocity.normalized);
-        m_arrow.transform.localEulerAngles = new Vector3(0, 0, m_rigid.velocity.y > 0 ? angle : -angle);
+        m_arrow.transform.eulerAngles = new Vector3(0, 0, m_rigid.velocity.y > 0 ? angle : -angle);
         //m_arrow.transform.localRotation = Quaternion.Euler(m_rigid.velocity.normalized);
     }
 
