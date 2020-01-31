@@ -1,73 +1,78 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-public class DraggableObject : MonoBehaviour
+using GGJ;
+public class DraggableObject: MonoBehaviour
 {
-    public float TimeMul = 1;
-    public float speedMul = 1;
-    public float maxSpeed = 15;
+    public float MaxObjectSpeed = 10;
 
-    public float minTimeScale = 0.1f;
-    public float maxTimeScale = 0.85f;
+    public float DisToTimeRatio = 1;
 
+    public float ForceMultiplyer = 10;
+
+    public bool IsDragged { get; private set; }
+    private ITimeController m_timeController;
     private Rigidbody2D m_rigid;
     private Vector3 m_mouseLastPosition;
     private Vector3 m_dragDelta;
     private SpriteRenderer m_arrow;
     private float m_arrowRatio;
-    // Start is called before the first frame update
-    void Start()
+    private float m_prevoiusTimeScale;
+
+    protected virtual void Start()
     {
+        m_timeController = TimeScaleController.GetTimeController();
         m_rigid = GetComponent<Rigidbody2D>();
         m_arrow = transform.Find("Arrow")?.GetComponent<SpriteRenderer>();
-        SetTimeScale(0);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    private void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         m_rigid.AddForce(m_dragDelta);
         Debug.Log(m_rigid.velocity.magnitude);
-        m_rigid.velocity = Vector3.ClampMagnitude(m_rigid.velocity, maxSpeed);
+        m_rigid.velocity = Vector3.ClampMagnitude(m_rigid.velocity, MaxObjectSpeed);
         Vector2 arrowSize = m_arrow.size;
-        arrowSize.x = Mathf.Lerp(2.56f, 8f, m_rigid.velocity.magnitude / maxSpeed);
+        arrowSize.x = Mathf.Lerp(2.56f, 8f, m_rigid.velocity.magnitude / MaxObjectSpeed);
         m_arrow.size = arrowSize;
         float angle = Vector3.Angle(Vector3.right, m_rigid.velocity.normalized);
-        m_arrow.transform.localEulerAngles = new Vector3(0, 0, m_rigid.velocity.y > 0 ? angle: -angle);
+        m_arrow.transform.localEulerAngles = new Vector3(0, 0, m_rigid.velocity.y > 0 ? angle : -angle);
         //m_arrow.transform.localRotation = Quaternion.Euler(m_rigid.velocity.normalized);
     }
 
-
-    private void OnMouseDown()
+    protected void OnMouseDown()
     {
-        m_mouseLastPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        StartDrag();
     }
 
-    private void OnMouseDrag()
+    protected void OnMouseDrag()
+    {
+        UpdateDrag();
+    }
+
+    protected void OnMouseUp()
+    {
+        EndDrag();
+    }
+
+    protected virtual void StartDrag()
+    {
+        m_mouseLastPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        m_timeController.StartTimeScaleControl(0);
+        IsDragged = true;
+    }
+    protected virtual void UpdateDrag()
     {
         Vector3 mouseRelative = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        float delta = Vector3.Distance(mouseRelative, m_mouseLastPosition) * TimeMul;
-        m_dragDelta = (mouseRelative - transform.position) * speedMul;
-        SetTimeScale(delta);
+        float delta = Vector3.Distance(mouseRelative, m_mouseLastPosition) * DisToTimeRatio;
+        m_dragDelta = (mouseRelative - transform.position) * ForceMultiplyer;
+        m_timeController.StartTimeScaleControl(delta);
         //Debug.Log(m_rigid.velocity);
         //Debug.Log(delta);
         m_mouseLastPosition = mouseRelative;
     }
-
-    private void OnMouseUp()
+    protected virtual void EndDrag()
     {
-        SetTimeScale(0);
-    }
-
-    private void SetTimeScale(float scale)
-    {
-        Time.timeScale = Mathf.Lerp(minTimeScale, maxTimeScale, scale);
-        Time.fixedDeltaTime = Time.timeScale * 0.02f;
+        m_timeController.EndTimeScaleControl();
+        IsDragged = false;
     }
 }
