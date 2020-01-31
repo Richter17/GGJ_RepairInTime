@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class RepairObject : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public int Index = -1;
+
+    private Rigidbody2D m_rigid;
+
+
+    private PolygonCollider2D m_collider;
+
+    private void Start()
     {
-        
+        m_rigid = GetComponent<Rigidbody2D>();
+        m_collider = GetComponentInChildren<PolygonCollider2D>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void RemovePhysics()
     {
-        
+        m_rigid.isKinematic = true;
+        m_collider.enabled = false;
     }
+
 }

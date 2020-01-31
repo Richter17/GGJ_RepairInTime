@@ -29,7 +29,7 @@ public class DraggableObject: MonoBehaviour
     protected virtual void FixedUpdate()
     {
         m_rigid.AddForce(m_dragDelta);
-        Debug.Log(m_rigid.velocity.magnitude);
+        //Debug.Log(m_rigid.velocity.magnitude);
         m_rigid.velocity = Vector3.ClampMagnitude(m_rigid.velocity, MaxObjectSpeed);
         Vector2 arrowSize = m_arrow.size;
         arrowSize.x = Mathf.Lerp(2.56f, 8f, m_rigid.velocity.magnitude / MaxObjectSpeed);

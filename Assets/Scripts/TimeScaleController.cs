@@ -58,7 +58,7 @@ namespace GGJ
 
         void Start()
         {
-            StartTimeScaleControl(0);
+            SetTimeScale(0);
         }
 
         public void PauseTime(bool active)
@@ -93,7 +93,7 @@ namespace GGJ
 
         private void SetTimeScale(float val)
         {
-            Time.timeScale = Mathf.Lerp(MinTimeScale, MaxTimeScale, val);
+            Time.timeScale = Mathf.Lerp(m_minTimeScale, m_maxTimeScale, val);
             Time.fixedDeltaTime = Time.timeScale * 0.02f;
             TimeScale = val;
         }
