@@ -13,7 +13,7 @@ public class EndHueScreen : MonoBehaviour
         get { return m_img.color; }
     }
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         m_img = GetComponent<Image>();
         StartCoroutine(HueAniamtion());
