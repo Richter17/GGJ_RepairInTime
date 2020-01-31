@@ -29,6 +29,8 @@ public class UIManager : MonoBehaviour
     public Button PauseRestartButton;
     public Button PauseBackButton;
 
+    public CanvasGroup LoadingCanvasGroup;
+    public Image LoadingBar;
     private Canvas m_CurrentCanvas; 
 
     public void Init()
@@ -53,6 +55,16 @@ public class UIManager : MonoBehaviour
         m_CurrentCanvas = m_UIStateToCanvasMap[state];
         m_CurrentCanvas.gameObject.SetActive(true);
     }
+
+    public void ShowLoading()
+    {
+        LoadingCanvasGroup.gameObject.SetActive(true);
+    }
+
+    public void HideLoading()
+    {
+        LoadingCanvasGroup.gameObject.SetActive(false);
+    } 
 
     public void HideUI()
     {
