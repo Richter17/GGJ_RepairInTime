@@ -29,7 +29,7 @@ public class ObjectHealth : MonoBehaviour
         Debug.Log(m_remainingHealth);
         if (m_remainingHealth <= 0)
         {
-            HealthDepleted();
+            HealthDepleted?.Invoke();
             DestroyObject();
         }
         else

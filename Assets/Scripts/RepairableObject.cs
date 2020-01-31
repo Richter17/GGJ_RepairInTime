@@ -7,16 +7,23 @@ namespace GGJ.RepairTheme
 {
     public delegate void RepairCompletedHandler(RepairableObject rep);
     public delegate void RepairedPieceHandler(int piecesLeft);
-    public class RepairableObject : MonoBehaviour
+    public class RepairableObject : MonoBehaviour, IRepairs
     {
         [SerializeField]
         private List<RepairableTrigger> m_repairTriggers;
 
         public event RepairCompletedHandler RepairCompleted;
         public event RepairedPieceHandler RepairedPiece;
+        public event RepairObjectDestroyedHandler RepairDestroyed;
+
+        private ObjectHealth m_health;
+
         // Start is called before the first frame update
         private void Start()
         {
+            m_health = GetComponent<ObjectHealth>();
+            if(m_health)
+                m_health.HealthDepleted += DestorySelf;
             m_repairTriggers = GetComponentsInChildren<RepairableTrigger>().ToList();
             foreach (var trig in m_repairTriggers)
             {
@@ -32,6 +39,11 @@ namespace GGJ.RepairTheme
                 RepairedPiece?.Invoke(m_repairTriggers.Count);
             else
                 RepairCompleted?.Invoke(this);
+        }
+
+        public void DestorySelf()
+        {
+            RepairDestroyed?.Invoke();
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using GGJ.RepairTheme;
+using System.Linq;
 
 public class Level01 : MonoBehaviour, ISceneController
 {
@@ -11,16 +12,19 @@ public class Level01 : MonoBehaviour, ISceneController
     public event GoToGameplayHandler GoToGameplay;
 
 
-    public ObjectHealth[] ObjectsHealth;
+    //public ObjectHealth[] ObjectsHealth;
+    private IRepairs[] RepairObjectsArray;
     private RepairableObject m_repairableObject;
 
     public void Init()
     {
-         m_repairableObject = FindObjectOfType<RepairableObject>();
+        m_repairableObject = FindObjectOfType<RepairableObject>();
         m_repairableObject.RepairCompleted += OnRepairComplete;
-        foreach (ObjectHealth item in ObjectsHealth)
+
+        RepairObjectsArray = FindObjectsOfType<MonoBehaviour>().OfType<IRepairs>().ToArray();
+        foreach (var reapirPiece in RepairObjectsArray)
         {
-            item.HealthDepleted += OnLevelLost;
+            reapirPiece.RepairDestroyed += OnLevelLost;
         }
     }
 
