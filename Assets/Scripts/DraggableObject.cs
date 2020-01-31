@@ -8,7 +8,7 @@ public class DraggableObject: MonoBehaviour
 
     public float DisToTimeRatio = 1;
 
-    public float ForceMultiplyer = 10;
+    public float ForceMultiplyer = 20;
 
     public bool CanBeDragged;
     public bool IsDragged { get; private set; }
