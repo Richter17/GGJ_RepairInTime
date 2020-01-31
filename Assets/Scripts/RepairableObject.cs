@@ -24,8 +24,9 @@ namespace GGJ.RepairTheme
             }
         }
 
-        private void OnPieceReapired( RepairableTrigger trigger)
+        private void OnPieceReapired(RepairableTrigger trigger)
         {
+            Debug.Log("repaired!");
             m_repairTriggers.Remove(trigger);
             if (m_repairTriggers.Count > 0)
                 RepairCompleted?.Invoke(this);

@@ -10,6 +10,7 @@ public class DraggableObject: MonoBehaviour
 
     public float ForceMultiplyer = 10;
 
+    public bool CanBeDragged;
     public bool IsDragged { get; private set; }
     private ITimeController m_timeController;
     private Rigidbody2D m_rigid;
@@ -41,17 +42,20 @@ public class DraggableObject: MonoBehaviour
 
     protected void OnMouseDown()
     {
-        StartDrag();
+        if(CanBeDragged)
+            StartDrag();
     }
 
     protected void OnMouseDrag()
     {
-        UpdateDrag();
+        if(CanBeDragged)
+            UpdateDrag();
     }
 
     protected void OnMouseUp()
     {
-        EndDrag();
+        if(CanBeDragged)
+            EndDrag();
     }
 
     protected virtual void StartDrag()
