@@ -30,7 +30,10 @@ namespace GGJ.RepairTheme
             m_rigid.isKinematic = true;
             m_collider.enabled = false;
             if (m_draggable)
+            {
+                m_draggable.EndDrag();
                 m_draggable.CanBeDragged = false;
+            }
         }
 
         public void DestorySelf()
