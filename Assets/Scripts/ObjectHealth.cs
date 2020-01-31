@@ -15,10 +15,12 @@ public class ObjectHealth : MonoBehaviour
         get { return m_damageMultiplier; }
     }
     protected float m_remainingHealth;
+    protected LifeBar m_lifeBar;
     // Start is called before the first frame update
     void Start()
     {
         m_remainingHealth = m_health;
+        m_lifeBar = GetComponentInChildren<LifeBar>();
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -26,7 +28,7 @@ public class ObjectHealth : MonoBehaviour
         ObjectHealth otherObj = other.gameObject.GetComponentInChildren<ObjectHealth>();
         float damage = other.relativeVelocity.magnitude;
         m_remainingHealth -= damage * (otherObj ? otherObj.DamageMultiplier : 1);
-        Debug.Log(m_remainingHealth);
+        m_lifeBar?.UpdateLife(m_remainingHealth / m_health);
         if (m_remainingHealth <= 0)
         {
             HealthDepleted?.Invoke();

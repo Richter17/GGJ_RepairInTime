@@ -8,13 +8,13 @@ using UnityEngine.SceneManagement;
     enum GameState { MainMenu, Gameplay};
 public class Main : MonoBehaviour
 {
-
+    private const int FIRST_LEVEL = 2;
     private GameState m_gameState;
     private Dictionary<GameState, int> m_stateToSceneIndexMap;
     private bool m_IsInSceneTransition = false;
 
     private Canvas WinScreen;
-    private int m_lastLevelIndex = 2;
+    private int m_lastLevelIndex = FIRST_LEVEL;
 
 
     private ISceneController m_SceneController;
@@ -47,7 +47,13 @@ public class Main : MonoBehaviour
     private void GoToNextLevel()
     {
         m_lastLevelIndex++;
-       StartCoroutine(LoadScene(m_lastLevelIndex));
+        if (m_lastLevelIndex >= SceneManager.sceneCountInBuildSettings)
+        {
+            m_lastLevelIndex = FIRST_LEVEL;
+            GoToMainMenu();
+            return;
+        }
+        StartCoroutine(LoadScene(m_lastLevelIndex));
     }
 
     IEnumerator LoadScene(int sceneIndex)
@@ -57,10 +63,10 @@ public class Main : MonoBehaviour
         {
             yield return null;
         }
+        
         m_UIManager.ToggleBG(sceneIndex == 1);
 
         m_IsInSceneTransition = true;
-
         AsyncOperation async = SceneManager.LoadSceneAsync(sceneIndex);
         async.allowSceneActivation = false;
         m_UIManager.ShowLoading();

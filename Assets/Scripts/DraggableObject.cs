@@ -34,7 +34,8 @@ public class DraggableObject: MonoBehaviour
         m_rigid.velocity = Vector3.ClampMagnitude(m_rigid.velocity, MaxObjectSpeed);
         if (!m_arrow) return;
         Vector2 arrowSize = m_arrow.size;
-        arrowSize.x = Mathf.Lerp(0, 5.12f, m_rigid.velocity.magnitude / MaxObjectSpeed);
+        m_arrow.enabled = m_rigid.velocity.magnitude  != 0;
+        arrowSize.x = Mathf.Lerp(1.24f, 5.12f, m_rigid.velocity.magnitude / MaxObjectSpeed);
         m_arrow.size = arrowSize;
         float angle = Vector3.Angle(Vector3.right, m_rigid.velocity.normalized);
         m_arrow.transform.eulerAngles = new Vector3(0, 0, m_rigid.velocity.y > 0 ? angle : -angle);
