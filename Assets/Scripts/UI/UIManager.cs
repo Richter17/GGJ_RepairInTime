@@ -29,7 +29,7 @@ public class UIManager : MonoBehaviour
     public Button PauseRestartButton;
     public Button PauseBackButton;
 
-    public CanvasGroup LoadingCanvasGroup;
+    public Canvas LoadingCanvasGroup;
     public Image LoadingBar;
     private Canvas m_CurrentCanvas; 
 
