@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public delegate void HealthDepletedHandler();
 public class ObjectHealth : MonoBehaviour
 {
     [SerializeField]
     protected float m_health = 100;
     [SerializeField]
     protected float m_damageMultiplier = 1;
+    public event HealthDepletedHandler HealthDepleted;
     public float DamageMultiplier
     {
         get { return m_damageMultiplier; }
@@ -23,10 +25,13 @@ public class ObjectHealth : MonoBehaviour
     {
         ObjectHealth otherObj = other.gameObject.GetComponentInChildren<ObjectHealth>();
         float damage = other.relativeVelocity.magnitude;
-        m_remainingHealth -= damage  * (otherObj ? otherObj.DamageMultiplier : 1);
+        m_remainingHealth -= damage * (otherObj ? otherObj.DamageMultiplier : 1);
         Debug.Log(m_remainingHealth);
-        if (m_health <= 0)
+        if (m_remainingHealth <= 0)
+        {
+            HealthDepleted();
             DestroyObject();
+        }
         else
             CrackEffect(m_remainingHealth / m_health);
     }
