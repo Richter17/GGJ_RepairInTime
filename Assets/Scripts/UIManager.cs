@@ -38,11 +38,11 @@ public class UIManager : MonoBehaviour
         m_UIStateToCanvasMap.Add(UIState.Win, WinScreenCanvas);
         m_UIStateToCanvasMap.Add(UIState.Pause, PauseCanvas);
 
-        WinBackButton.onClick.AddListener(() => UIHomeRequest());
-        WinNextButton.onClick.AddListener(() => UINextRequest());
+        //WinBackButton.onClick.AddListener(() => UIHomeRequest());
+        //WinNextButton.onClick.AddListener(() => UINextRequest());
 
-        LoseBackButton.onClick.AddListener(() => UIHomeRequest());
-        LoseRestartButton.onClick.AddListener(() => UIRestartRequest());
+        //LoseBackButton.onClick.AddListener(() => UIHomeRequest());
+        //LoseRestartButton.onClick.AddListener(() => UIRestartRequest());
     }
 
     public void ShowUICanvas(UIState state)

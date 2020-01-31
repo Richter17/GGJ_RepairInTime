@@ -8,12 +8,13 @@ using UnityEngine.SceneManagement;
     enum GameState { MainMenu, Gameplay};
 public class Main : MonoBehaviour
 {
+
     private GameState m_gameState;
     private Dictionary<GameState, int> m_stateToSceneIndexMap;
     private bool m_IsInSceneTransition = false;
 
     private Canvas WinScreen;
-    private int m_lastLevelIndex = 1;
+    private int m_lastLevelIndex = 2;
 
 
     private ISceneController m_SceneController;
@@ -22,27 +23,31 @@ public class Main : MonoBehaviour
     
     private void Start()
     {
+        DontDestroyOnLoad(transform.gameObject);
         m_UIManager = FindObjectOfType<UIManager>();
+        DontDestroyOnLoad(m_UIManager.gameObject);
         m_UIManager.Init();
         m_UIManager.UIHomeRequest += GoToMainMenu;
         m_UIManager.UINextRequest += GoToNextLevel;      
-
+        m_UIManager.UIRestartRequest += RestartCurrentLevel;      
+        m_UIManager.UIRestartRequest += RestartCurrentLevel;
+        GoToMainMenu();
     }
 
-    private void GoToGameplayLevel(int index)
+    private void RestartCurrentLevel()
     {
-        
+       StartCoroutine(LoadScene(m_lastLevelIndex));
     }
 
     private void GoToMainMenu()
     {
-        LoadScene(0);
+       StartCoroutine(LoadScene(1));
     }
 
     private void GoToNextLevel()
     {
         m_lastLevelIndex++;
-        LoadScene(m_lastLevelIndex);
+       StartCoroutine(LoadScene(m_lastLevelIndex));
     }
 
     IEnumerator LoadScene(int sceneIndex)
@@ -54,16 +59,12 @@ public class Main : MonoBehaviour
 
         m_IsInSceneTransition = true;
 
-        yield return new WaitForSeconds(3);
-
         AsyncOperation async = SceneManager.LoadSceneAsync(sceneIndex);
 
         while (!async.isDone)
         {
             yield return null;
         }
-
-        SceneManager.SetActiveScene(SceneManager.GetSceneAt(sceneIndex));
  
         m_SceneController = null;
         GameObject[] rootObjects = SceneManager.GetActiveScene().GetRootGameObjects();
@@ -74,7 +75,7 @@ public class Main : MonoBehaviour
                 m_SceneController = obj.GetComponentInChildren<ISceneController>();
             }          
         }
-
+        Debug.Log("Scene loaded");
         m_IsInSceneTransition = false;
         InitScene();
     }
@@ -83,11 +84,6 @@ public class Main : MonoBehaviour
     {
         m_SceneController.LevelWon += (() => m_UIManager.ShowUICanvas(UIState.Win));
         m_SceneController.LevelLost += (() => m_UIManager.ShowUICanvas(UIState.Lose));
+        m_SceneController.GoToGameplay += RestartCurrentLevel;
     }
-
-    private void OnHomeScreen()
-    {
-        AsyncOperation async = SceneManager.LoadSceneAsync(1);
-    }
-
 }
