@@ -17,7 +17,7 @@ namespace GGJ.RepairTheme {
             {
                 repairPiece.RemovePhysics();
                 repairPiece.transform.parent = transform.parent;
-                Repaired?.Invoke(this);
+                
                 StartCoroutine(TweenToPosition(piece.transform, 2f));
             }
 
@@ -30,10 +30,13 @@ namespace GGJ.RepairTheme {
             {
                 obj.localPosition = Vector3.Lerp(obj.localPosition, transform.localPosition, currentTime / duration);
                 obj.localRotation = Quaternion.Lerp(obj.localRotation, transform.localRotation, currentTime / duration);
-                currentTime += Time.deltaTime;
+                obj.localScale = Vector3.Lerp(obj.localScale, transform.localScale, currentTime / duration);
+                currentTime += 0.01f;
                 yield return null;
             }
 
+            Debug.Log("ggg");
+            Repaired?.Invoke(this);
             obj.localRotation = transform.localRotation;
             obj.localPosition = transform.localPosition;
         }
