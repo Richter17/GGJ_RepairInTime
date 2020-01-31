@@ -35,7 +35,6 @@ namespace GGJ.RepairTheme {
                 yield return null;
             }
 
-            Debug.Log("ggg");
             Repaired?.Invoke(this);
             obj.localRotation = transform.localRotation;
             obj.localPosition = transform.localPosition;

@@ -51,7 +51,7 @@ public class UIManager : MonoBehaviour
     public void ShowUICanvas(UIState state)
     {
         HideUI();
-        //m_bgCanvas.SetActive(true);
+        m_bgCanvas.SetActive(true);
         m_CurrentCanvas = m_UIStateToCanvasMap[state];
         m_CurrentCanvas.gameObject.SetActive(true);
     }
