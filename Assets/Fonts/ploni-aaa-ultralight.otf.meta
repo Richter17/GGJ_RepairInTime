@@ -1,0 +1,29 @@
+fileFormatVersion: 2
+guid: f0c0ded507f008945803a449b1b7eb85
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Ploni 1.1 AAA
+  fontNames:
+  - Ploni 1.1 AAA
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 2a5c0900b7153794bade2e5b4739ff13, type: 3}
+  - {fileID: 12800000, guid: 13edd3e4ca0c33d4db26fc88475d5243, type: 3}
+  - {fileID: 12800000, guid: 09852e45799029a4aa4275e51b259ca7, type: 3}
+  - {fileID: 12800000, guid: 9d5dd787dbffc964e99c9ab00df6cbb7, type: 3}
+  - {fileID: 12800000, guid: 21c168f7a3b47e440b91ac06ef9ce8de, type: 3}
+  - {fileID: 12800000, guid: a1089a387d7b2cc4db1f949c30b4e8eb, type: 3}
+  - {fileID: 12800000, guid: 454f9f1e8a72f4d468ed1cbc23cca298, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
