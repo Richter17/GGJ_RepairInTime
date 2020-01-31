@@ -1640,5 +1640,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41a2e77f87b67a04eadd5acd42b16fd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObjectsHealth:
+  TrackedHealths:
   - {fileID: 658983078}
