@@ -43,7 +43,14 @@ namespace GGJ.RepairTheme
 
         public void DestorySelf()
         {
+            StartCoroutine(Delay());
+        }
+
+        private IEnumerator Delay()
+        {
+            yield return new WaitForSecondsRealtime(0.5f);
             RepairDestroyed?.Invoke();
+
         }
     }
 }

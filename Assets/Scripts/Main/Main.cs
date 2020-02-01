@@ -104,8 +104,15 @@ public class Main : MonoBehaviour
     private void InitScene()
     {
         m_SceneController.Init();
-        m_SceneController.LevelWon += (() => m_UIManager.ShowUICanvas(UIState.Win, (m_lastLevelIndex - FIRST_LEVEL + 1)));
-        m_SceneController.LevelLost += (() => m_UIManager.ShowUICanvas(UIState.Lose, (m_lastLevelIndex - FIRST_LEVEL + 1)));
+        m_SceneController.LevelWon += (delegate
+        {
+            m_UIManager.ShowUICanvas(UIState.Win, (m_lastLevelIndex - FIRST_LEVEL + 1));
+            m_mixer.ControlMixer(new MixerArgs("BG_Volume", -100), false);
+        });
+        m_SceneController.LevelLost += (delegate {
+            m_UIManager.ShowUICanvas(UIState.Lose, (m_lastLevelIndex - FIRST_LEVEL + 1));
+            m_mixer.ControlMixer(new MixerArgs("BG_Volume", -100), false);
+        });
         m_SceneController.GoToGameplay += RestartCurrentLevel;
     }
 }
