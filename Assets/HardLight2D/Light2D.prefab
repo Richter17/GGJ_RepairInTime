@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9133201526527734124}
   - component: {fileID: 1278962375649610277}
   - component: {fileID: 1278962375649610282}
+  - component: {fileID: 1759263597}
   m_Layer: 1
   m_Name: Light2D
   m_TagString: Untagged
@@ -46,30 +47,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Range: 5
-  Color: {r: 1, g: 1, b: 1, a: 1}
+  Color: {r: 0.5188679, g: 0.3343222, b: 0, a: 1}
   Intensity: 1
-  SortingOrder: -1000
-  FilteringSettings:
-    useTriggers: 0
+  SortingOrder: 1016
+  filteringSettings:
     useLayerMask: 1
     layerMask:
       serializedVersion: 2
       m_Bits: 4294967295
-  OptimizationSettings:
+  optimizationSettings:
+    CalculateOnlyOnce: 0
     OptimizedRaycasting: 1
     CameraCulling: {fileID: 0}
-  position: {x: 0, y: 0}
+    ChooseMainCamera: 0
+  position: {x: -1.39, y: 3.57}
+  TransformIsDirty: 0
   needUpdate: 0
   ContactFilter:
     useTriggers: 0
-    useLayerMask: 0
+    useLayerMask: 1
     useDepth: 0
     useOutsideDepth: 0
     useNormalAngle: 0
     useOutsideNormalAngle: 0
     layerMask:
       serializedVersion: 2
-      m_Bits: 0
+      m_Bits: 4294967295
     minDepth: 0
     maxDepth: 0
     minNormalAngle: 0
@@ -119,4 +122,20 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1000
+  m_SortingOrder: 1016
+--- !u!58 &1759263597
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1278962375649610280}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.56, y: 0.1}
+  serializedVersion: 2
+  m_Radius: 0.81
