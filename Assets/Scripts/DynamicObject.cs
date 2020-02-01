@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GGJ.Editor;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class DynamicObject : MonoBehaviour

@@ -15,6 +15,7 @@ namespace GGJ.RepairTheme {
             RepairObject repairPiece = piece.GetComponent<RepairObject>();
             if(repairPiece && repairPiece.Index == index)
             {
+                if (!repairPiece.IsAlive) return;
                 repairPiece.RemovePhysics();
                 repairPiece.transform.parent = transform.parent;
                 
