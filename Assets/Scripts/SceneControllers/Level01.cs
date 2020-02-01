@@ -9,15 +9,19 @@ public class Level01 : MonoBehaviour, ISceneController
     public event LevelWinHandler LevelWon;
     public event LevelFailHandler LevelLost;
     public event PauseHandler PauseRequest;
-    public event GoToGameplayHandler GoToGameplay;
-
+    public event GoToGameplayHandler GoToGameplay;    
 
     //public ObjectHealth[] ObjectsHealth;
     private IRepairs[] RepairObjectsArray;
     private RepairableObject m_repairableObject;
+    private bool tutorialDone = false;
+    private int m_tutorialStep = 0;
+    [SerializeField]
+    private GameObject[] tutorialOverlays;
 
     public void Init()
     {
+        Time.timeScale = 0;
         m_repairableObject = FindObjectOfType<RepairableObject>();
         m_repairableObject.RepairCompleted += OnRepairComplete;
 
@@ -26,14 +30,55 @@ public class Level01 : MonoBehaviour, ISceneController
         {
             reapirPiece.RepairDestroyed += OnLevelLost;
         }
+        NextTutorialStep();
     }
 
     private void OnLevelLost()
     {
         LevelLost();
     }
+
+    private void StartGame()
+    {
+        Time.timeScale = 0;
+    }
+
+    private void NextTutorialStep()
+    {
+        if (tutorialOverlays.Length > m_tutorialStep)
+        {
+            foreach (GameObject overlay in tutorialOverlays)
+            {
+                overlay.SetActive(false);
+            }
+            tutorialOverlays[m_tutorialStep].SetActive(true);
+            m_tutorialStep++;
+        }
+        else
+        {
+            foreach (GameObject overlay in tutorialOverlays)
+            {
+                overlay.SetActive(false);
+            }
+            tutorialDone = true;
+            StartGame();
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.touchCount > 0 && !tutorialDone)
+        {
+            NextTutorialStep();
+        }
+
+        if (Input.GetMouseButtonUp(0) && !tutorialDone)
+        {
+            NextTutorialStep();
+        }
+    }
     // Update is called once per frame
-private void OnRepairComplete(RepairableObject objectRef)
+    private void OnRepairComplete(RepairableObject objectRef)
     {
         LevelWon();
     }
