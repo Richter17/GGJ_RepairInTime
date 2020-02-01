@@ -41,6 +41,6 @@ public class BGSoundBehavouir : MonoBehaviour
 
         m_as.pitch = Mathf.Lerp(1f, 2, (precentage % 10) *0.1f);
         Debug.Log(m_as.pitch);
-        m_mixer.ControlMixer(new MixerArgs("BG_Tempo", 1f / m_as.pitch));
+        m_mixer.ControlMixer(new MixerArgs("BG_Tempo", 1f / m_as.pitch), false);
     }
 }

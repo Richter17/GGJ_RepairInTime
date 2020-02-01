@@ -9,8 +9,8 @@ namespace GGJ.Audio
         AudioMixer Master { get; }
 
         void ResetMixer();
-        void ControlMixer(MixerArgs arg);
-        void ControlMixer(MixerArgs[] args);
+        void ControlMixer(MixerArgs arg ,bool animate);
+        void ControlMixer(MixerArgs[] args, bool animate);
         void ClearParamters(string paramName);
         void ClearParamters(string[] paramsNames);
         void Mute(bool active);

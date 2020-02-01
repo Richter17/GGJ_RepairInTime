@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+using GGJ.Audio;
 
     enum GameState { MainMenu, Gameplay};
 public class Main : MonoBehaviour
@@ -18,12 +18,14 @@ public class Main : MonoBehaviour
 
 
     private ISceneController m_SceneController;
+    private IMixerController m_mixer;
 
     private UIManager m_UIManager;
     
     private void Start()
     {
         DontDestroyOnLoad(transform.gameObject);
+        m_mixer = SoundController.GetMixer();
         m_UIManager = FindObjectOfType<UIManager>();
         DontDestroyOnLoad(m_UIManager.gameObject);
         m_UIManager.Init();
@@ -70,6 +72,7 @@ public class Main : MonoBehaviour
         AsyncOperation async = SceneManager.LoadSceneAsync(sceneIndex);
         async.allowSceneActivation = false;
         m_UIManager.ShowLoading();
+        m_mixer.ControlMixer(new MixerArgs("BG_Volume", -100), false);
         float delayCount = 0;
         while (async.progress < 0.89f || delayCount < 0.5f)
         {
@@ -82,6 +85,7 @@ public class Main : MonoBehaviour
         async.allowSceneActivation = true;
         yield return async.isDone;
         
+        m_mixer.ControlMixer(new MixerArgs("BG_Volume", 0), false);
         m_UIManager.HideLoading();
         m_SceneController = null;
         GameObject[] rootObjects = SceneManager.GetActiveScene().GetRootGameObjects();
