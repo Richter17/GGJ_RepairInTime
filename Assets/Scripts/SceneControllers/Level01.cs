@@ -9,8 +9,8 @@ public class Level01 : MonoBehaviour, ISceneController
     public event LevelWinHandler LevelWon;
     public event LevelFailHandler LevelLost;
     public event PauseHandler PauseRequest;
-    public event GoToGameplayHandler GoToGameplay;    
-
+    public event GoToGameplayHandler GoToGameplay;
+    public DraggableObject[] draggables;
     //public ObjectHealth[] ObjectsHealth;
     private IRepairs[] RepairObjectsArray;
     private RepairableObject m_repairableObject;
@@ -22,6 +22,10 @@ public class Level01 : MonoBehaviour, ISceneController
     public void Init()
     {
         Time.timeScale = 0;
+        foreach (DraggableObject draggable in draggables)
+        {
+            draggable.CanBeDragged = false;
+        }
         m_repairableObject = FindObjectOfType<RepairableObject>();
         m_repairableObject.RepairCompleted += OnRepairComplete;
 
@@ -40,6 +44,10 @@ public class Level01 : MonoBehaviour, ISceneController
 
     private void StartGame()
     {
+        foreach (DraggableObject draggable in draggables)
+        {
+            draggable.CanBeDragged = true;
+        }
         Time.timeScale = 0;
     }
 
