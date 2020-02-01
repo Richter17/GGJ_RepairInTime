@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public delegate void HealthDepletedHandler();
+public delegate void HitObjectHandler(Vector2 position, Transform trans);
 public class ObjectHealth : MonoBehaviour
 {
     [SerializeField]
@@ -10,6 +11,7 @@ public class ObjectHealth : MonoBehaviour
     [SerializeField]
     protected float m_damageMultiplier = 1;
     public event HealthDepletedHandler HealthDepleted;
+    public event HitObjectHandler HitObject;
     public float DamageMultiplier
     {
         get { return m_damageMultiplier; }
@@ -31,6 +33,7 @@ public class ObjectHealth : MonoBehaviour
         ObjectHealth otherObj = other.gameObject.GetComponentInChildren<ObjectHealth>();
         float damage = other.relativeVelocity.magnitude;
         m_remainingHealth -= damage * (otherObj ? otherObj.DamageMultiplier : 1);
+        HitObject?.Invoke(other.contacts[0].point, other.transform);
         m_lifeBar?.UpdateLife(m_remainingHealth / m_health);
         if (m_remainingHealth <= 0)
         {

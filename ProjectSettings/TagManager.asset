@@ -47,3 +47,6 @@ TagManager:
   - name: Repair
     uniqueID: 2994757461
     locked: 0
+  - name: Hit
+    uniqueID: 2661388791
+    locked: 0

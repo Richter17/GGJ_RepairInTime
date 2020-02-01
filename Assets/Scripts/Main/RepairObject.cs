@@ -6,7 +6,8 @@ namespace GGJ.RepairTheme
     public class RepairObject : MonoBehaviour, IRepairs
     {
         public int Index = -1;
-
+        [SerializeField]
+        ParticleSystem m_hitEffect;
         private Rigidbody2D m_rigid;
         private DraggableObject m_draggable;
         private PolygonCollider2D m_collider;
@@ -29,7 +30,10 @@ namespace GGJ.RepairTheme
             m_draggable = GetComponent<DraggableObject>();
             m_health = GetComponent<ObjectHealth>();
             if(m_health)
+            {
+                m_health.HitObject += OnHitObject;
                 m_health.HealthDepleted += DestorySelf;
+            }
         }
 
         public void RemovePhysics()
@@ -42,6 +46,16 @@ namespace GGJ.RepairTheme
                 m_draggable.EndDrag();
                 m_draggable.CanBeDragged = false;
             }
+        }
+
+        private void OnHitObject(Vector2 pos, Transform other)
+        {
+            var ps = Instantiate(m_hitEffect, pos, Quaternion.identity);
+            ps.Play();
+            HitSoundContainer sound = other.GetComponent<HitSoundContainer>();
+            if (sound)
+                sound.PlayHit();
+
         }
 
         public void DestorySelf()

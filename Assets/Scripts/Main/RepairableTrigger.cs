@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace GGJ.RepairTheme {
+    [RequireComponent(typeof(AudioSource))]
     public class RepairableTrigger : MonoBehaviour
     {
 
         public int index = -1;
         public delegate void RepairedHandler(RepairableTrigger trigger);
         public event RepairedHandler Repaired;
+        private AudioSource m_as
+        {
+            get { return GetComponent<AudioSource>(); }
+        }
 
         private void OnTriggerEnter2D(Collider2D piece)
         {
@@ -16,6 +21,7 @@ namespace GGJ.RepairTheme {
             if(repairPiece && repairPiece.Index == index)
             {
                 if (!repairPiece.IsAlive) return;
+                m_as.Play();
                 repairPiece.RemovePhysics();
                 repairPiece.transform.parent = transform.parent;
                 
