@@ -12,6 +12,7 @@ namespace GGJ.RepairTheme
         private DraggableObject m_draggable;
         private PolygonCollider2D m_collider;
         private ObjectHealth m_health;
+        private AudioSource m_as;
         public bool IsAlive
         {
             get
@@ -29,6 +30,7 @@ namespace GGJ.RepairTheme
             m_collider = GetComponentInChildren<PolygonCollider2D>();
             m_draggable = GetComponent<DraggableObject>();
             m_health = GetComponent<ObjectHealth>();
+            m_as = GetComponent<AudioSource>();
             if(m_health)
             {
                 m_health.HitObject += OnHitObject;
@@ -60,6 +62,7 @@ namespace GGJ.RepairTheme
 
         public void DestorySelf()
         {
+            m_as?.Play();
             RepairDestroyed?.Invoke();
         }
     }

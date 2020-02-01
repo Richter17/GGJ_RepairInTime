@@ -85,7 +85,7 @@ public class Main : MonoBehaviour
         async.allowSceneActivation = true;
         yield return async.isDone;
         
-        m_mixer.ControlMixer(new MixerArgs("BG_Volume", 0), false);
+        m_mixer.ControlMixer(new MixerArgs("BG_Volume", -10), false);
         m_UIManager.HideLoading();
         m_SceneController = null;
         GameObject[] rootObjects = SceneManager.GetActiveScene().GetRootGameObjects();
