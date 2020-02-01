@@ -1738,12 +1738,12 @@ PrefabInstance:
     - target: {fileID: 1278962375649610283, guid: d95da88540d2d6e44a0c4c40c581b24a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.39
+      value: 2.52
       objectReference: {fileID: 0}
     - target: {fileID: 1278962375649610283, guid: d95da88540d2d6e44a0c4c40c581b24a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.57
+      value: 4.67
       objectReference: {fileID: 0}
     - target: {fileID: 1278962375649610283, guid: d95da88540d2d6e44a0c4c40c581b24a,
         type: 3}
@@ -1790,7 +1790,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 9133201526527734124, guid: d95da88540d2d6e44a0c4c40c581b24a,
+        type: 3}
+      propertyPath: Intensity
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 9133201526527734124, guid: d95da88540d2d6e44a0c4c40c581b24a,
+        type: 3}
+      propertyPath: filteringSettings.layerMask.m_Bits
+      value: 2817
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 1759263597, guid: d95da88540d2d6e44a0c4c40c581b24a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d95da88540d2d6e44a0c4c40c581b24a, type: 3}
 --- !u!1 &1529872617
 GameObject:
