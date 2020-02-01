@@ -52,8 +52,11 @@ public class UIManager : MonoBehaviour
     public void ShowUICanvas(UIState state, int level)
     {
         HideUI();
-        m_bgCanvas.SetActive(true);
-        if (state == UIState.Win) WinLevelText.text = level.ToString();
+        if (state == UIState.Win)
+        {
+            m_bgCanvas.SetActive(true);
+            WinLevelText.text = level.ToString();
+        }
         m_CurrentCanvas = m_UIStateToCanvasMap[state];
         m_CurrentCanvas.gameObject.SetActive(true);
     }
@@ -74,7 +77,7 @@ public class UIManager : MonoBehaviour
         {
             m_CurrentCanvas.gameObject.SetActive(false);
         }
-        //m_bgCanvas.SetActive(false);
+        m_bgCanvas.SetActive(false);
     }
 
     public void ToggleBG(bool val)

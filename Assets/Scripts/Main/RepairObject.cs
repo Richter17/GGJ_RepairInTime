@@ -11,6 +11,14 @@ namespace GGJ.RepairTheme
         private DraggableObject m_draggable;
         private PolygonCollider2D m_collider;
         private ObjectHealth m_health;
+        public bool IsAlive
+        {
+            get
+            {
+                if (!m_health) return true;
+                return m_health.IsAlive;
+            }
+        }
 
         public event RepairObjectDestroyedHandler RepairDestroyed;
 
