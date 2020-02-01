@@ -75,10 +75,10 @@ public class Level01 : MonoBehaviour, ISceneController
 
     private void Update()
     {
-        if (Input.touchCount > 0 && !tutorialDone)
-        {
-            NextTutorialStep();
-        }
+        //if (Input.GetTouch > 0 && !tutorialDone)
+        //{
+        //    NextTutorialStep();
+        //}
 
         if (Input.GetMouseButtonUp(0) && !tutorialDone)
         {

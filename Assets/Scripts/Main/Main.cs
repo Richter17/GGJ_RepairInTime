@@ -40,6 +40,12 @@ public class Main : MonoBehaviour
        StartCoroutine(LoadScene(m_lastLevelIndex));
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+            GoToMainMenu();
+    }
+
     private void GoToMainMenu()
     {
        m_UIManager.ToggleBG(true);
