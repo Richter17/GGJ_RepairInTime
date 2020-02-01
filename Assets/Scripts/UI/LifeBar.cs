@@ -11,6 +11,7 @@ public class LifeBar : MonoBehaviour
     private float m_speed = 0.015f;
     private Image m_img;
 
+    private readonly Vector3 ROTATION = Vector3.forward * 90;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +21,7 @@ public class LifeBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        transform.eulerAngles = ROTATION;
     }
 
     public void UpdateLife(float life)

@@ -624,6 +624,7 @@ MonoBehaviour:
   WinScreenCanvas: {fileID: 1279402412}
   WinBackButton: {fileID: 257729118}
   WinNextButton: {fileID: 727426698}
+  WinLevelText: {fileID: 1288982180}
   LoseScreenCanvas: {fileID: 1495790783}
   LoseBackButton: {fileID: 246839221}
   LoseRestartButton: {fileID: 1929831797}

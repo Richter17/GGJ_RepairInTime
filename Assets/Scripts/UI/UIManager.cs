@@ -19,6 +19,7 @@ public class UIManager : MonoBehaviour
     public Canvas WinScreenCanvas;
     public Button WinBackButton;
     public Button WinNextButton;
+    public Text WinLevelText;
 
     public Canvas LoseScreenCanvas;
     public Button LoseBackButton;
@@ -48,10 +49,11 @@ public class UIManager : MonoBehaviour
         LoseRestartButton.onClick.AddListener(() => UIRestartRequest());
     }
 
-    public void ShowUICanvas(UIState state)
+    public void ShowUICanvas(UIState state, int level)
     {
         HideUI();
         m_bgCanvas.SetActive(true);
+        if (state == UIState.Win) WinLevelText.text = level.ToString();
         m_CurrentCanvas = m_UIStateToCanvasMap[state];
         m_CurrentCanvas.gameObject.SetActive(true);
     }
